@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>LMS</title>
+{% endblock %}
+
+{% block content %}
+<br>
+<br>
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title mb-4">Lectures</h2>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>Lecture Name</th>
+                                    <th>Description</th>
+                                    <th>PDF</th>
+                                    <th>Teacher</th>
+                                    <th>Last Date to Access</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for lecture in lectures %}
+                                <tr>
+                                    <td>{{ lecture.lecture_name }}</td>
+                                    <td>{{ lecture.description }}</td>
+                                    <td>
+                                        {% if lecture.pdf %}
+                                        <a href="{{ lecture.pdf.url }}" class="btn btn-primary btn-sm">Download PDF</a>
+                                        {% else %}
+                                        No PDF
+                                        {% endif %}
+                                    </td>
+
+                                    {% if lecture.teacher.first_name %}
+                                    <td>Prof. {{ lecture.teacher.first_name }}</td>
+                                    {% else %}
+                                    <td>{{lecture.teacher.email}}</td>
+                                    {% endif %}
+
+                                    <td>{{ lecture.last_date }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

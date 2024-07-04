@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}
+<title>About Us</title>
+{% endblock %}
+{% load static %}
+{% block content %}
+    <!--================ Start About Area =================-->
+    <section class="about_area section_gap">
+      <div class="container">
+        <div class="row h_blog_item">
+          <div class="col-lg-6">
+            <div class="h_blog_img">
+              <img class="img-fluid" src="{% static 'asset/img/about.png' %}" alt="About Us Image" />
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="h_blog_text">
+              <div class="h_blog_text_inner left right">
+                <h4>Welcome to Learning Assistant for Kids</h4>
+                <p>
+                  Hello, and welcome to our learning platform.
+                </p>
+                <p>
+                  Here at Learning Assistant for Kids, we provide a diverse range of engaging quizzes covering topics from science and history to literature and pop culture. Through our interactive and thought-provoking questions, learners of all ages can test their knowledge and discover new insights with each quiz.
+
+                  Join us on this exciting journey of discovery and challenge yourself to unlock your full potential. Let's embark on a quest for knowledge together!
+                </p>
+               
+              
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--================ End About Area =================-->
+{% endblock %}

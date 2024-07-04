@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% block title %}<title>{{ quiz.quiz_name }} - Results</title>{% endblock %}
+{% load static %}
+{% block content %}
+<style>
+    .result_area {
+        padding: 60px 0;
+        background-color: #f9f9f9;
+        text-align: center;
+    }
+
+    .result_area h2 {
+        font-size: 2.5rem;
+        color: #343a40;
+        margin-bottom: 30px;
+    }
+
+    .result_details {
+        margin-top: 20px;
+        border: 2px solid #ddd;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+    }
+
+    .result_details p {
+        font-size: 1.2rem;
+        margin-bottom: 15px;
+    }
+
+    .pass_icon, .fail_icon {
+        margin: 20px auto;
+        display: block;
+    }
+
+    .pass_icon {
+        width: 100px;
+    }
+
+    .fail_icon {
+        width: 200px;
+    }
+
+    .feedback_message {
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+    }
+
+    .retry_button {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        font-size: 1.2rem;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .retry_button:hover {
+        background-color: #0056b3;
+    }
+</style>
+
+<section class="result_area section_gap">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2" style="margin-top: 30px;">
+                <h2>{{ quiz.quiz_name }} - Results</h2>
+                <div class="result_details">
+                    <p>Total Questions: {{ total }}</p>
+                    <p>Total Marks: 50</p>
+                    <p>Your Score: {{ score }}</p>
+                    <p>Percentage: {{ percentage }}%</p>
+                    {% if percentage >= 50 %}
+                        <img src="{% static 'asset/img/pass.jpg' %}" alt="Pass Icon" class="pass_icon">
+                        <p class="feedback_message">Congratulations! You have passed the quiz.</p>
+                        {% if percentage == 100 %}
+                            <p class="feedback_message">Perfect Score! Well done!</p>
+                        {% endif %}
+                    {% else %}
+                        <img src="{% static 'asset/img/ayaz.jpg' %}" alt="Fail Icon" class="fail_icon">
+                        <p class="feedback_message">Sorry, you did not pass the quiz.</p>
+                        {% if percentage == 0 %}
+                            <p class="feedback_message">You need to study more.</p>
+                        {% endif %}
+                    {% endif %}
+                    <button class="retry_button" onclick="window.location.href = '/take-quiz/{{ quiz.id }}/'">Retry Quiz</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

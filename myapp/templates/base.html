@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link rel="icon" href="{% static 'asset/img/icon.png' %}" type="image/png" />
+    {% block title %}<title>Learning assistant for kids</title>{% endblock %}
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'asset/css/bootstrap.css' %}" />
+    <link rel="stylesheet" href="{% static 'asset/css/flaticon.css' %}" />
+    <link rel="stylesheet" href="{% static 'asset/css/themify-icons.css' %}" />
+    <link rel="stylesheet" href="{% static 'asset/vendors/owl-carousel/owl.carousel.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'asset/vendors/nice-select/css/nice-select.css' %}" />
+    <link rel="stylesheet" href="{% static 'asset/css/style.css' %}" />
+    <!-- Animation CSS -->
+     
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header_area">
+        <div class="main_menu">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <div class="container">
+                    <a class="navbar-brand logo_h" href="{% url 'home' %}">
+                        
+                        <!-- <span>Learning Assistant for Kids</span> -->
+                        <img src="{% static 'asset/img/auth.png' %}" alt="Logo" style="width: 150px; height: auto;"/>
+
+
+                    </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav menu_nav ml-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="{% url 'home' %}">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'about_us' %}">About</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'contact' %}">Contact</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'quizes' %}">Quizes</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'games' %}">Play Games</a>
+                            </li>
+
+                            {% if user.is_authenticated %}
+
+                            {% if user.is_staff %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'teacher-dashboard' %}">Teacher Dashboard</a>
+                            </li>
+
+                            {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'lms' %}">LMS</a>
+                            </li>
+                            {% endif %}
+
+                            {% endif %}
+
+                            {% if request.user.is_authenticated %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                            </li>
+                            {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'login' %}">Login/Signup</a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <!-- End Header -->
+
+    {% block content %}
+
+    {% endblock %}
+
+    <!-- Footer -->
+    <footer class="footer-area section_gap">
+        <div class="container">
+            <div class="row">
+                <!-- Footer Widgets -->
+            </div>
+            <div class="row footer-bottom d-flex justify-content-between">
+
+                <p class="col-lg-8 col-sm-12 footer-text m-0 text-white">
+                    &copy;<script>document.write(new Date().getFullYear());</script>
+                    All rights reserved | Created for Learning assistant for kids by
+                    <a href="#" target="_blank"> Abu Hurayra and Hasnain Nawaz </a>
+                </p>
+
+                <div class="col-lg-4 col-sm-12 footer-social">
+                    <a href="#"><i class="ti-facebook"></i></a>
+                    <a href="#"><i class="ti-twitter"></i></a>
+                    <a href="#"><i class="ti-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- End Footer -->
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="{% static 'asset/js/jquery-3.2.1.min.js' %}"></script>
+    <script src="{% static 'asset/js/popper.js' %}"></script>
+    <script src="{% static 'asset/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'asset/vendors/nice-select/js/jquery.nice-select.min.js' %}"></script>
+    <script src="{% static 'asset/vendors/owl-carousel/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'asset/js/owl-carousel-thumb.min.js' %}"></script>
+    <script src="{% static 'asset/js/jquery.ajaxchimp.min.js' %}"></script>
+</body>
+</html>

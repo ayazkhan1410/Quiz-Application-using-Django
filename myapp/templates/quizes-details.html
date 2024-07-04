@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block title %}<title>Quizes</title> {% endblock %}
+{% load static %}
+{% block content %}
+    <!--================ Start Course Details Area =================-->
+    <section class="course_details_area section_gap">
+        <div class="container">
+            <div class="row">
+                {% for item in question_obj %}
+                <div class="col-lg-8 course_details_left">
+                    <div class="main_image">
+                        <img class="img-fluid" src="{{ item.image.url }}" alt="{{ item.quiz_name.quiz_name }}">
+                    </div>
+                    <div class="content_wrapper">
+                        <h4 class="title">Objectives</h4>
+                        <div class="content">
+                            <p>{{ item.objectives }}</p>
+                        </div>
+                        <h4 class="title">Eligibility</h4>
+                        <div class="content">
+                            <p>{{ item.eligibility }}</p>
+                            <!-- Additional content -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 right-contents">
+                    <ul>
+                        <li>
+                            <a class="justify-content-between d-flex" href="#">
+                                <p>Quiz Name</p>
+                                <span class="or">{{ item.quiz_name }}</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="justify-content-between d-flex" href="#">
+                                <p>Quiz Fee </p>
+                                <span>Free</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="justify-content-between d-flex" href="#">
+                                <p>Quiz Timing </p>
+                                <span>1 Hour</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="justify-content-between d-flex" href="#">
+                                <p>Total Marks </p>
+                                <span>{{ item.total_score }}</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <a href="{% url 'take_quiz' item.id %}" class="primary-btn2 text-uppercase enroll rounded-0 text-white">Start the Quiz</a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <!--================ End Course Details Area =================-->
+{% endblock %}

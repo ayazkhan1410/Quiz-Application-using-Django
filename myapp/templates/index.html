@@ -1,0 +1,205 @@
+{% extends 'base.html' %}
+{% block title %}<title>Learning assistant for kids</title> {% endblock %}
+{% load static %}
+
+{% block content %}
+
+<!--================ Start Home Banner Area =================-->
+<section class="home_banner_area animated fadeIn">
+    <div class="banner_inner">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="banner_content text-center">
+                        <p class="text-uppercase">
+                            Empower Your Learning Journey
+                        </p>
+                        <h2 class="text-uppercase mt-4 mb-5">
+                            Take Your Education to the Next Level
+                        </h2>
+                        <div>
+                            <a href="{% url 'games' %}" class="primary-btn2 mb-3 mb-sm-0">Play Mind Games</a>
+                            <a href="{% url 'quizes' %}" class="primary-btn ml-sm-3 ml-0">Explore Quizzes</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  </section>
+  
+<!--================ End Home Banner Area =================-->
+
+
+<!--================ Start Feature Area =================-->
+<section class="feature_area section_gap_top animated fadeInUp">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-5">
+                <div class="main_title">
+                    <h2 class="mb-3">Exciting Features</h2>
+                    <p>
+                        Explore the amazing features we offer to enhance your quiz experience.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-md-6">
+                <div class="single_feature">
+                    <div class="icon"><img src="{% static 'asset/img/quiz_icon.jpg' %}" alt="Quiz Icon" style="width: 200px;"  ></div>
+                    <div class="desc">
+                        <h4 class="mt-3 mb-2">Wide Range of Quizzes</h4>
+                        <p>
+                            Choose from a variety of engaging quizzes on different topics.
+                        </p>
+                    </div>
+                </div>
+            </div>
+  
+            <div class="col-lg-4 col-md-6">
+                <div class="single_feature">
+                    <div class="icon"><img src="{% static 'asset/img/timer_icon.png' %}" alt="Timer Icon" style="width: 200px;"></div>
+                    <div class="desc">
+                        <h4 class="mt-3 mb-2">Timed Challenges</h4>
+                        <p>
+                            Test your knowledge under pressure with timed quiz challenges.
+                        </p>
+                    </div>
+                </div>
+            </div>
+  
+            <div class="col-lg-4 col-md-6">
+                <div class="single_feature">
+                    <div class="icon"><img src="{% static 'asset/img/games.jpg' %}" alt="Leaderboard Icon" style="width: 200px;"></div>
+                    <div class="desc">
+                        <h4 class="mt-3 mb-2">Play Games</h4>
+                        <p>
+                            Engage in competitive gameplay, excel in challenges
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+
+        </div>
+    </div>
+  </section>
+  
+  
+<!--================ End Feature Area =================-->
+
+
+<!--================ Start Popular Courses Area =================-->
+<div class="popular_courses animated fadeInUp">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-5">
+        <div class="main_title">
+          <h2 class="mb-3">Our Popular Free Quizzes</h2>
+          <p>
+            Explore our collection of popular free quizzes in various subjects.
+          </p>
+        </div>
+      </div>
+    </div>
+
+   
+    <div class="row">
+        {% for item in is_popular %}
+          <div class="col-lg-4 col-md-6">
+            <div class="single_course">
+          
+              <div class="course_head">
+
+                <a href="{% url 'quizes-details' item.slug %}">
+                    <img class="img-fluid" src="{{ item.image.url }}" alt="{{ item.quiz_name }}" />
+                </a>
+               
+              </div>
+    
+
+              <div class="course_content">
+                 <h4 class="mb-3">
+                    {% if item.slug %}
+                    <a href="{% url 'quizes-details' item.slug %}">{{ item.quiz_name }}</a>
+                    {% else %}
+                    {{ item.quiz_name }}
+                    {% endif %}
+                 </h4>
+                <p>
+
+                 {{item.objectives|slice:":60"}}
+                 
+                 {% if item.eligibility|length > 60 %}
+                 ...
+                 {% endif %}
+
+                </p>
+
+                <span class="price">Free</span>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+    </div>
+<!--================ End Popular Courses Area =================-->
+<br>
+<br>
+
+  <!--================ Start Quiz Challenges Area =================-->
+  <div class="popular_courses animated fadeInUp">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-5">
+                <div class="main_title">
+                    <h2 class="mb-3">Play Our  Challenging games</h2>
+                    <p>
+                        Explore our diverse collection of challenging games. Test your skills, compete with others, and strive for the top of the leaderboard, all available for free.
+
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            {% for item in games %}
+            <div class="col-lg-4 col-md-6">
+                <div class="single_course">
+                    <div class="course_head">
+                        <a href="{{item.url}}">
+                            <img class="img-fluid" src="{{ item.image.url }}" alt="{{ item.quiz_name }}" />
+                        </a>
+                    </div>
+
+                    <div class="course_content">
+                        <h4 class="mb-3">
+                            {% if item.slug %}
+                            <a href="{{item.url}}">{{ item.game_name }}</a>
+                            {% else %}
+                            {{ item.game_name }}
+                            {% endif %}
+                        </h4>
+                        <p>
+                            {{item.description|slice:":60"}}{% if item.description|length > 60 %}...{% endif %}
+                        </p>
+
+                        <span class="price">Play</span>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+  
+</section>
+
+
+  <!--================ End Quiz Challenges Area =================-->
+</div>
+</div>
+</div>
+
+<!--================ End Trainers Area =================-->
+{% endblock %}

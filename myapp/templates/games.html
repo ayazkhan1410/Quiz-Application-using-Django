@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% block title %}<title>Play Mind Blowing Games!!</title> {% endblock %}
+{% load static %}
+
+{% block content %}
+
+
+<!--================ Start Popular Quizzes Area =================-->
+<div class="popular_quizzes section_gap_top">
+
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-5">
+          <div class="main_title">
+
+            <h2 class="mt-10">Play Games</h2>
+            <p>Gather your energy and dive into the world of gaming</p>
+            <hr>
+  
+            <!-- Add Search Button -->
+            <form method="POST" action="{% url 'games' %}">
+            {% csrf_token %}
+            <div class="row justify-content-center mb-4">
+              <div class="col-lg-12">
+                <div class="input-group">
+                  <input type="text" name="search" class="form-control" placeholder="Search Game">
+                  <div class="input-group-append">
+                    <button class="btn btn-primary mx-2" type="submit">Search</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </form>
+
+            <!-- End Search Button -->
+          </div>
+        </div>
+      </div>
+  
+      <div class="container">
+        <div class="row">
+            {% if games %}
+                {% for item in games %}
+                <div class="col-lg-4 col-md-6" style="margin-top: -50px;">
+                    <div class="single_course">
+                      <br>
+                      <br>
+                      <br>
+
+                        <div class="course_head">
+                           
+                            <a href="{{item.url}}">
+                                <img class="img-fluid" src="{{ item.image.url }}" alt="{{ item.quiz_name }}" />
+                            </a>
+                        </div>
+                    
+                        <div class="course_content">
+                            <h4 class="mb-3">
+                                <a href="{{item.url}}">{{ item.game_name }}</a>
+                            </h4>
+                            <p>{{ item.description|slice:":60" }} {% if item.description|length > 60 %}...{% endif %}</p>
+                            <span class="price">Play</span>
+                        </div>
+                    </div>
+
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="col-lg-12 text-center">
+                    <p>No results found.</p>
+                </div>
+            {% endif %}
+        </div>
+      </div>
+    </div>
+    {% include 'game-pagination.html' %}
+  </div>
+  <!--================ End Popular Quizzes Area =================-->
+
+
+{%endblock%}
